@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= @page_title %></title>
+    <%= csrf_meta_tags %>
+    <meta charset="UTF-8">
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+  </head>
+
+  <body>
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+    <%= link_to 'HOSPdb', root_path, class: "nav-link" %>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item dropdown">
+        <li class="nav-item active">
+          <%= link_to 'Больницы', hospitals_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item active">
+        <%= link_to 'Персонал', staffs_path, class: "nav-link" %>
+        </li>
+      </ul>
+
+    </div>
+  </nav>
+  <div class="content">
+    <% if flash[:notice] %>
+      <div class="alert alert-success"><%= flash[:notice] %></div>
+    <% end %>
+
+    <% if flash[:alert] %>
+      <div class="alert alert-danger"><%= flash[:alert] %></div>
+    <% end %>
+  <%= yield %>
+  </div>
+
+
+
+  </body>
+</html>

@@ -1,0 +1,24 @@
+
+<div class="container">
+<h1>Больница № <%= @hospital.num %></h1> <br />
+<h3>Персонал:</h3><br />
+  <% @staffs.each_slice(5) do |staff| %>
+    <div class="row">
+      <% staff.each do |staff| %>
+        <div class="col-md-2 col-sm-3" >
+          <div class="card">
+            <h4><%= staff.position %></h4>
+            <h1><%= staff.sname %></h1>
+            <h5>Дата рождения: <%= staff.bday %></h5>
+            <%= link_to 'Подробнее', staff_path(staff), class: 'btn btn-primary' %>
+            <%= button_to "Удалить", staff_path(staff), :method => "delete",
+                          class: 'btn btn-danger' %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+<%= link_to 'Редактировать', edit_hospital_path, class: 'btn btn-primary'  %>
+<%= button_to "Удалить", @hospital, :method => "delete" ,class: 'btn btn-danger'%>
+
+  </div>

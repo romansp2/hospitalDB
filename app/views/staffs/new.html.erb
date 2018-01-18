@@ -1,0 +1,51 @@
+
+<div class="container">
+  <h1>Добавление нового сотрудника</h1>
+  <%=form_for @staff do |f| %>
+    <div class="form-group">
+      <%= f.label :text ,"Фамилия" %>
+      <%= f.text_field :sname, class: 'form-control' %>
+    </div>
+    <br />
+    <div class="form-group">
+      <%= f.label :text ,"Дата рождения" %>
+      <br />
+      <%= date_field(:staff, :bday) %>
+    </div>
+    <br />
+    <div class="form-group">
+      <%= f.label :position ,"Должность" %>
+      <%= select(:staff, :position,%w(Doctor Nurse Paramedic)) %>
+    </div>
+    <p>
+      <% for hospital in Hospital.all %>
+      <div>
+        <%= check_box_tag "staff[hospital_ids][]", hospital.id, @staff.hospitals.include?(hospital) %>
+        <%= hospital.num %>
+      </div>
+      <% end %>
+    </p>
+
+    <div class="form-group">
+      <% @hospitals.each_slice(@hospitals.length) do |hospital| %>
+        <div class="row">
+          <% hospital.each do |hospital| %>
+            <div class="col-md-2 col-sm-3" >
+              <div class="card">
+                <h5>Больница №</h5>
+                <h1><%= hospital.num %></h1>
+                <%= check_box_tag "hospitals_staffs[hospital_ids][]", hospital.id %>
+              </div>
+            </div>
+
+          <% end %>
+
+        </div>
+      <% end %>
+    </div>
+    <%= f.submit "Сохранить", class:'btn btn-primary' %>
+    <%= link_to 'Закрыть', root_path, class:'btn btn-danger' %>
+
+  <% end %>
+
+</div>

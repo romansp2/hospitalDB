@@ -1,0 +1,27 @@
+<nav class="navbar navbar-expand-md navbar-light" style="background-color: #e3f2fd;">
+  <%= link_to 'Добавить больницу', hospitals_new_path, class: "nav-link" %>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+</nav>
+<div class="container">
+  <% @hospitals.each_slice(@hospitals.length) do |hospital| %>
+    <div class="row">
+      <% hospital.each do |hospital| %>
+        <div class="col-md-2 col-sm-3" >
+          <div class="card">
+            <h5>Больница №</h5>
+              <h1><%= hospital.num %></h1>
+              <%= link_to 'Подробнее', hospital_path(hospital), class: 'btn btn-primary' %>
+              <%= button_to "Удалить", hospital_path(hospital), :method => "delete",
+                            class: 'btn btn-danger' %>
+            </div>
+          </div>
+
+    <% end %>
+
+      </div>
+    <% end %>
+
+
+  </div>

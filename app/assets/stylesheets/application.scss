@@ -1,0 +1,46 @@
+@import "bootstrap";
+
+.content{
+  padding-top: 50px;
+}
+h1{
+  text-align: center;
+}
+.container{
+  width: 95%;
+  margin: 0 auto;
+  text-align: center;
+
+}
+.btn{
+  margin: 5px 5px;
+}
+.container .row{
+  width: inherit;
+  margin: 0 0;
+}
+.container .col-md-2{
+  margin: 5px 0;
+}
+.container #staff_sname {
+  width: 400px;
+  margin: 0 auto;
+}
+.container #hospital_num {
+  width: 250px;
+  margin: 0 auto;
+}
+.navbar-light{
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.navbar-light .nav-link{
+
+  border: #B2DCFA;
+  border-style: solid;
+  margin: auto;
+  text-align: center;
+
+}

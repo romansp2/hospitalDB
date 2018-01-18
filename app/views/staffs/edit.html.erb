@@ -1,0 +1,43 @@
+
+<div class="container">
+<h1><%= @staff.sname+' '+@staff.bday %></h1>
+
+<%=form_for @staff do |f| %>
+  <div class="form-group">
+    <%= f.label :text ,"Фамилия" %>
+    <%= f.text_field :sname, class: 'form-control' %>
+  </div>
+  <br />
+  <div class="form-group">
+    <%= f.label :text ,"Дата рождения" %>
+    <br />
+    <%= date_field(:staff, :bday, value:@staff.bday) %>
+  </div>
+  <br />
+  <div class="form-group">
+    <%= f.label :position ,"Должность" %>
+    <%= select(:staff, :position,%w(Doctor Nurse Paramedic)) %>
+  </div>
+  <div class="form-group">
+    <% @hospitals.each_slice(@hospitals.length) do |hospital| %>
+      <div class="row">
+        <% hospital.each do |hospital| %>
+          <div class="col-md-2 col-sm-3" >
+            <div class="card">
+              <h5>Больница №</h5>
+              <h1><%= hospital.num %></h1>
+              <%= check_box_tag('hospital_ids',value=1) %>
+            </div>
+          </div>
+
+        <% end %>
+
+      </div>
+    <% end %>
+  </div>
+  <%= f.submit "Сохранить", class:'btn btn-primary' %>
+  <%= link_to 'Закрыть', root_path, class:'btn btn-danger' %>
+
+<% end %>
+
+</div>

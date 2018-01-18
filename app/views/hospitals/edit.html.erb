@@ -1,0 +1,25 @@
+<div class="container">
+<h1>Изменение информации о больнице</h1>
+<%=form_for @hospital do |f| %>
+
+  <div class="form-group">
+    <%= f.label :text ,"Номер Больнинцы" %>
+    <%= f.number_field :num, class: 'form-control' %>
+  </div>
+  <br />
+  <div class="form-group">
+
+    <h3>Отметьте персонал больницы</h3>
+    <% @staff.each do |person| %>
+      <%= label_tag(person.position) %>
+      <%= label_tag(person.sname) %>
+      <%= check_box_tag "hospitals_staffs[staffs_id][]", person.id %>
+      <p>Дата рождения: <%= label_tag(person.bday) %> </p>
+    <% end %>
+  </div>
+  <%= f.submit "Сохранить", class:'btn btn-primary' %>
+  <%= link_to 'Закрыть', root_path, class:'btn btn-danger' %>
+
+<% end %>
+
+</div>

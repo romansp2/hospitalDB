@@ -1,0 +1,27 @@
+<nav class="navbar navbar-expand-md navbar-light" style="background-color: #e3f2fd;">
+  <%= link_to 'Добавить сотрудника', staffs_new_path, class: "nav-link" %>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+</nav>
+<div class="container">
+  <% @staffs.each_slice(@staffs.length) do |staff| %>
+    <div class="row">
+      <% staff.each do |staff| %>
+        <div class="col-md-2 col-sm-3" >
+          <div class="card">
+            <h4><%= staff.position %></h4>
+            <h1><%= staff.sname %></h1>
+            <h5>Дата рождения: <%= staff.bday %></h5>
+            <%= link_to 'Подробнее', staff_path(staff), class: 'btn btn-primary' %>
+            <%= button_to "Удалить", staff_path(staff), :method => "delete",
+                          class: 'btn btn-danger' %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+
+</div>
+</div>
