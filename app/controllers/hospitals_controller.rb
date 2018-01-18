@@ -5,8 +5,7 @@ class HospitalsController < ApplicationController
 
   def create
     @hospital = Hospital.new(hospital_params)
-    data=params.require(:hospitals_staffs)
-    logger.info(data)
+    
     if @hospital.save
 
       flash[:notice] = "Больница создана"
