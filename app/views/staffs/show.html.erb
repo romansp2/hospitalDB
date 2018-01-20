@@ -10,6 +10,7 @@
           <div class="card">
             <h5>Больница №</h5>
             <h1><%= hospital.num %></h1>
+            <%= link_to 'Покинуть', layoff_path(hospital.id, @staff.id), class: 'btn btn-danger' %>
           </div>
         </div>
       <% end %>

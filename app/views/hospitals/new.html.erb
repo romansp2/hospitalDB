@@ -18,7 +18,7 @@
               <h4><%= staff.position %></h4>
               <h1><%= staff.sname %></h1>
               <h5>Дата рождения: <%= staff.bday %></h5>
-              <%= check_box_tag "hospitals_staffs[staff_ids][]", staff.id %>
+              <%= check_box_tag "hospitals_staffs[]", staff.id %>
             </div>
           </div>
         <% end %>

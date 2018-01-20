@@ -11,8 +11,8 @@
             <h1><%= staff.sname %></h1>
             <h5>Дата рождения: <%= staff.bday %></h5>
             <%= link_to 'Подробнее', staff_path(staff), class: 'btn btn-primary' %>
-            <%= button_to "Удалить", staff_path(staff), :method => "delete",
-                          class: 'btn btn-danger' %>
+            <%= link_to 'Исключить', layoff_path(@hospital.id, staff.id), class: 'btn btn-danger' %>
+
           </div>
         </div>
       <% end %>

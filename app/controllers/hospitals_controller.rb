@@ -5,13 +5,18 @@ class HospitalsController < ApplicationController
 
   def create
     @hospital = Hospital.new(hospital_params)
-    data=params.require(:hospitals_staffs)
-    logger.info(data)
+    staff_ids = params[:hospitals_staffs]
     if @hospital.save
-
-      flash[:notice] = "Больница создана"
-
-      redirect_to root_path
+        if staff_ids != nil
+            staff_ids.each do |staff_id|
+            @hospital.staffs << Staff.find_by(id:staff_id)
+            flash[:notice] = "Больница создана"
+            redirect_to root_path
+            end
+          else
+        flash[:notice] = "Больница создана"
+        redirect_to root_path
+        end
     else
       flash[:alert] = @hospital.errors.full_messages
       redirect_to hospitals_new_path
@@ -24,6 +29,7 @@ class HospitalsController < ApplicationController
   end
 
   def destroy
+
     @hospital = Hospital.find(params[:id])
     @hospital.destroy
     flash[:notice] = "Больница удалена "
@@ -36,11 +42,28 @@ class HospitalsController < ApplicationController
   @staffs = Staff.all
   end
 
+  def lay_off
+    @hospital = Hospital.find(params[:id])
+    @hospital.staffs.delete(Staff.find(params[:staff_id]))
+    @hospital.reload
+    flash[:notice] = "Сотрудник исключен из больницы"
+    redirect_back(fallback_location: root_path)
+  end
+
   def update
     @hospital = Hospital.find(params[:id])
+    staff_ids = params.require(:hospitals_staffs)
     if @hospital.update(hospital_params)
+      if staff_ids != nil
+      staff_ids.each do |staff_id|
+        @hospital.staffs << Staff.find_by(id:staff_id)
+        flash[:notice] = "Больница добавлена"
+        redirect_to hospital_path(@hospital)
+      end
+      else
       flash[:notice] = "Больница добавлена"
       redirect_to hospital_path(@hospital)
+      end
     else
       flash[:alert] = @hospital.errors.full_messages
       redirect_to edit_hospital_path(@hospital)
@@ -49,11 +72,12 @@ class HospitalsController < ApplicationController
 
   def edit
     @hospital = Hospital.find(params[:id])
-    @staff = Staff.all
+    @staffs = Staff.all - @hospital.staffs
   end
 
-  private
 
+
+  private
 
   def hospital_params
     params.require(:hospital).permit(:num)

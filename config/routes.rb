@@ -26,8 +26,10 @@ Rails.application.routes.draw do
   get 'hospitals/show'
 
   get 'hospitals/destroy'
-
   get 'hospitals/new'
+
+  get 'hospitals/:id/staffs/:staff_id', to: 'hospitals#lay_off', as: :layoff
+  
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

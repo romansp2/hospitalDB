@@ -5,7 +5,7 @@
   </button>
 </nav>
 <div class="container">
-  <% @staffs.each_slice(@staffs.length) do |staff| %>
+  <% @staffs.each_slice(@staffs.length+1) do |staff| %>
     <div class="row">
       <% staff.each do |staff| %>
         <div class="col-md-2 col-sm-3" >
