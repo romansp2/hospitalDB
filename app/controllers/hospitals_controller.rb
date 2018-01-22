@@ -52,7 +52,7 @@ class HospitalsController < ApplicationController
 
   def update
     @hospital = Hospital.find(params[:id])
-    staff_ids = params.require(:hospitals_staffs)
+    staff_ids = params[:hospitals_staffs]
     if @hospital.update(hospital_params)
       if staff_ids != nil
       staff_ids.each do |staff_id|
